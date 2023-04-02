@@ -21,7 +21,10 @@ function counterReducer(state = initialState, action: { type: string }) {
       return {
         ...state,
         counter: {
-          value: state.counter.value - 1,
+          value:
+            state.counter.value > 0
+              ? state.counter.value - 1
+              : state.counter.value,
         },
       };
     }
@@ -30,14 +33,14 @@ function counterReducer(state = initialState, action: { type: string }) {
   }
 }
 
-export const store = createStore(counterReducer);
+export const storeRedux = createStore(counterReducer);
 
 export function CounterWithOldRedux() {
-  const counter = useSelector<{ counter: { value: number } }>(
+  const counter = useSelector<{ counter: { value: number } }, number>(
     (state) => state.counter.value
-  ) as number;
+  );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onIncrement = () => dispatch({ type: "counter/increment" });
   const onDecrement = () => dispatch({ type: "counter/decrement" });
