@@ -1,19 +1,16 @@
-import { Provider } from "react-redux";
-import { CounterWithOldRedux, storeRedux } from "./CounterWithOldRedux";
-import { CounterWithRTK } from "./CounterWithRTK";
-import { CounterWithState } from "./CounterWithState";
-import { storeRTK } from "./features/store";
+import { CounterWithRTK } from "./components/CounterWithRTK/CounterWithRTK";
+import { CounterRTKContext } from "./components/CounterWithRTK/context/CounterRTKContext";
+import { CounterWithState } from "./components/CounterWithXState/CounterWithState";
+import { CounterWithXState } from "./components/CounterWithXState/CounterWithXState";
 
 function App() {
   return (
     <>
       <CounterWithState />
-      <Provider store={storeRedux}>
-        <CounterWithOldRedux />
-      </Provider>
-      <Provider store={storeRTK}>
+      <CounterRTKContext>
         <CounterWithRTK />
-      </Provider>
+      </CounterRTKContext>
+      <CounterWithXState />
     </>
   );
 }
